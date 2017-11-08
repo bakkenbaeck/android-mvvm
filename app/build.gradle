@@ -40,7 +40,7 @@ dependencies {
             "com.android.support:recyclerview-v7:$supportVersion",
 
             // Architecture
-            'android.arch.lifecycle:extensions:1.0.0',
+            "android.arch.lifecycle:extensions:$archVersion",
 
             // Kotlin
             "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
@@ -59,15 +59,16 @@ dependencies {
     testImplementation (
             'junit:junit:4.12',
             'org.mockito:mockito-core:1.10.19',
+            "android.arch.core:core-testing:$archVersion",
     )
 
     androidTestImplementation (
             'com.android.support.test:runner:1.0.1',
-            'com.android.support.test.espresso:espresso-core:3.0.1'
+            'com.android.support.test.espresso:espresso-core:3.0.1',
     )
 
     annotationProcessor (
-            'android.arch.lifecycle:compiler:1.0.0'
+            "android.arch.lifecycle:compiler:$archVersion"
     )
 }
 repositories {

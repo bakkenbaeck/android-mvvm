@@ -1,40 +1,29 @@
 package com.bakkenbaeck.mvvm.model.network
 
-import android.content.Context
+import com.bakkenbaeck.mvvm.model.data.Comment
+import com.bakkenbaeck.testUtil.NetworkSourceGenerator
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
-import org.mockito.Mockito
 
 
 class NetworkSourceTest {
-
-    private lateinit var context: Context
+    private lateinit var networkSource : NetworkSource
+    private lateinit var httpClient: OkHttpClient
 
     @Before
     fun setup() {
-        this.context = Mockito.mock(Context::class.java)
-        Mockito.`when`(this.context.getString(Mockito.anyInt())).thenReturn("http://www.example.com")
+        val mockNetworkSource = NetworkSourceGenerator()
+        networkSource = mockNetworkSource.networkSource
+        httpClient = mockNetworkSource.httpClient
     }
 
     @Test
     fun getCommentsReturnsNonNullResponse() {
-        val networkSource = getNetworkSource("comments_200.json")
-        val response = networkSource.getComments().toBlocking().value()
+        val response: List<Comment> = networkSource.getComments().blockingGet()
         assertNotNull(response)
     }
 
-    private fun getNetworkSource(mockedResponseFilename: String): NetworkSource {
-        val httpClient = mockHttpClient(mockedResponseFilename)
-        return NetworkSource(context, httpClient)
-    }
 
-    private fun mockHttpClient(mockedResponseFilename: String): OkHttpClient {
-        val interceptor = MockResponseInterceptor(mockedResponseFilename)
-        return OkHttpClient
-                .Builder()
-                .addInterceptor(interceptor)
-                .build()
-    }
 }
