@@ -2,9 +2,7 @@ package com.bakkenbaeck.mvvm.model.network
 
 import android.content.Context
 import com.bakkenbaeck.mvvm.R
-import com.bakkenbaeck.mvvm.model.data.Comment
 import com.bakkenbaeck.mvvm.ui.App
-import io.reactivex.Single
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -23,12 +21,10 @@ class NetworkSource(
                 .baseUrl(context.getString(R.string.baseUrl))
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .client(this.httpClient)
+                .client(httpClient)
                 .build()
         return retrofit.create(NetworkInterface::class.java)
     }
 
-    fun getComments(): Single<List<Comment>> {
-        return networkInterface.getComments()
-    }
+    fun getComments() = networkInterface.getComments()
 }

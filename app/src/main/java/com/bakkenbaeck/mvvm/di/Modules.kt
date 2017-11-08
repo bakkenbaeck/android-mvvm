@@ -12,14 +12,10 @@ object Modules {
 
 private class ProductionDependencies: ModuleProvider {
     private val networkSource by lazy { NetworkSource() }
-    override fun networkSource(): NetworkSource {
-        return networkSource
-    }
+    override fun networkSource() = networkSource
 
     private val schedulerProvider by lazy { AppSchedulerProvider() }
-    override fun scheduler(): SchedulerProvider {
-        return schedulerProvider
-    }
+    override fun scheduler() = schedulerProvider
 }
 
 interface ModuleProvider {

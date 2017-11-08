@@ -11,8 +11,6 @@ class CommentsAdapter : RecyclerView.Adapter<CommentViewHolder>() {
 
     private val items: MutableList<Comment> = mutableListOf()
 
-    override fun getItemCount() = items.size
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CommentViewHolder {
         val layoutInflater = LayoutInflater.from(parent.context)
         return CommentViewHolder(layoutInflater.inflate(R.layout.list_item_comment, parent, false))
@@ -23,12 +21,13 @@ class CommentsAdapter : RecyclerView.Adapter<CommentViewHolder>() {
         holder.body.text = item.body
     }
 
-    private fun getItemForPosition(position: Int) : Comment = items[position]
+    private fun getItemForPosition(position: Int) = items[position]
+
+    override fun getItemCount() = items.size
 
     fun add(comments: List<Comment>) {
         items.clear()
         items.addAll(comments)
         notifyDataSetChanged()
     }
-
 }

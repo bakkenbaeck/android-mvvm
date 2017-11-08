@@ -24,6 +24,4 @@ class NetworkSourceTest {
         val response: List<Comment> = networkSource.getComments().blockingGet()
         assertNotNull(response)
     }
-
-
 }

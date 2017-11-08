@@ -20,24 +20,24 @@ class CommentsActivity : AppCompatActivity() {
         subscribeToComments()
     }
 
-    fun initView() {
+    private fun initView() {
         initViewModel()
         initRecyclerView()
     }
 
     private fun initRecyclerView() {
         comments.apply {
-            layoutManager = LinearLayoutManager(this.context, LinearLayoutManager.VERTICAL, false)
+            layoutManager = LinearLayoutManager(context, LinearLayoutManager.VERTICAL, false)
             adapter = commentsAdapter
         }
     }
 
     private fun initViewModel() {
-        this.viewModel = ViewModelProviders.of(this).get(CommentsViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(CommentsViewModel::class.java)
     }
 
     private fun subscribeToComments() {
-        this.viewModel.comments.observe(this, Observer {
+        viewModel.comments.observe(this, Observer {
             commentsAdapter.add(it ?: emptyList())
         })
     }

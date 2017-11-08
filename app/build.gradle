@@ -44,7 +44,6 @@ dependencies {
 
             // Kotlin
             "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
-            'org.jetbrains.anko:anko:0.10.1',
 
             // Network
             "com.squareup.retrofit2:retrofit:${retrofitVersion}",

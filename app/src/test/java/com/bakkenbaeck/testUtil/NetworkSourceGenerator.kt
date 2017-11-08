@@ -18,7 +18,7 @@ class NetworkSourceGenerator(private val mockResponseFilename: String = "comment
     }
 
     private fun generateHttpClient(): OkHttpClient {
-        val interceptor = MockResponseInterceptor(this.mockResponseFilename)
+        val interceptor = MockResponseInterceptor(mockResponseFilename)
         return OkHttpClient
                 .Builder()
                 .addInterceptor(interceptor)

@@ -23,10 +23,10 @@ class CommentsViewHolderTest {
 
     @Before
     fun setup() {
-        this.dependencies = TestModules()
-        Modules.init(this.dependencies)
-        this.viewModel = CommentsViewModel()
-        this.observer = Mockito.mock(Observer::class.java) as Observer<List<Comment>>
+        dependencies = TestModules()
+        Modules.init(dependencies)
+        viewModel = CommentsViewModel()
+        observer = Mockito.mock(Observer::class.java) as Observer<List<Comment>>
     }
 
     @Test

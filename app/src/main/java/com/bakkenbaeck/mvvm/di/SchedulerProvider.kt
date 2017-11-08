@@ -11,11 +11,7 @@ interface SchedulerProvider {
 }
 
 class AppSchedulerProvider : SchedulerProvider {
-    override fun ui(): Scheduler {
-        return AndroidSchedulers.mainThread()
-    }
+    override fun ui() = AndroidSchedulers.mainThread()
 
-    override fun io(): Scheduler {
-        return Schedulers.io()
-    }
+    override fun io() = Schedulers.io()
 }
