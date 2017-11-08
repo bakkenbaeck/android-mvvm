@@ -1,0 +1,3 @@
+<resources>
+    <string name="baseUrl">https://jsonplaceholder.typicode.com/</string>
+</resources>
