@@ -1,5 +1,6 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
 
 android {
     compileSdkVersion 26
@@ -35,15 +36,24 @@ dependencies {
 
     implementation (
             // Support
-            'com.android.support:appcompat-v7:26.1.0',
+            "com.android.support:appcompat-v7:$supportVersion",
+            "com.android.support:recyclerview-v7:$supportVersion",
+
+            // Architecture
+            'android.arch.lifecycle:extensions:1.0.0',
 
             // Kotlin
             "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version",
+            'org.jetbrains.anko:anko:0.10.1',
 
             // Network
-            "com.squareup.retrofit2:retrofit:$retrofitVersion",
-            "com.squareup.retrofit2:converter-moshi:$retrofitVersion",
+            "com.squareup.retrofit2:retrofit:${retrofitVersion}",
+            "com.squareup.retrofit2:converter-moshi:${retrofitVersion}",
+            "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}",
 
+            // Reactive
+            'io.reactivex.rxjava2:rxandroid:2.0.1',
+            'io.reactivex.rxjava2:rxjava:2.1.5',
     )
 
     testImplementation (
@@ -54,6 +64,10 @@ dependencies {
     androidTestImplementation (
             'com.android.support.test:runner:1.0.1',
             'com.android.support.test.espresso:espresso-core:3.0.1'
+    )
+
+    annotationProcessor (
+            'android.arch.lifecycle:compiler:1.0.0'
     )
 }
 repositories {

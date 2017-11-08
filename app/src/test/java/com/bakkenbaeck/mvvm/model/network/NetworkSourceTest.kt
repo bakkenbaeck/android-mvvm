@@ -21,7 +21,7 @@ class NetworkSourceTest {
     @Test
     fun getCommentsReturnsNonNullResponse() {
         val networkSource = getNetworkSource("comments_200.json")
-        val response = networkSource.getComments().execute().body()
+        val response = networkSource.getComments().toBlocking().value()
         assertNotNull(response)
     }
 
