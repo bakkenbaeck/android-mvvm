@@ -13,4 +13,7 @@ import com.bakkenbaeck.mvvm.model.data.Comment
 
     @Insert(onConflict = REPLACE)
     fun save(comments: List<Comment>)
+
+    @Query("SELECT * FROM comment where id = :commentId")
+    fun getComment(commentId: Int): Comment?
 }
