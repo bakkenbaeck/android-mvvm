@@ -7,7 +7,9 @@ import com.bakkenbaeck.mvvm.R
 import com.bakkenbaeck.mvvm.model.data.Comment
 
 
-class CommentsAdapter : RecyclerView.Adapter<CommentViewHolder>() {
+class CommentsAdapter(
+        private val itemClick: (Int) -> Unit
+) : RecyclerView.Adapter<CommentViewHolder>() {
 
     private val items: MutableList<Comment> = mutableListOf()
 
@@ -19,6 +21,7 @@ class CommentsAdapter : RecyclerView.Adapter<CommentViewHolder>() {
     override fun onBindViewHolder(holder: CommentViewHolder, position: Int) {
         val item = getItemForPosition(position)
         holder.body.text = item.body
+        holder.body.setOnClickListener { itemClick(item.id) }
     }
 
     private fun getItemForPosition(position: Int) = items[position]
