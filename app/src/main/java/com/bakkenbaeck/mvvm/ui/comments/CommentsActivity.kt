@@ -11,7 +11,7 @@ import kotlinx.android.synthetic.main.activity_comments.*
 class CommentsActivity : AppCompatActivity() {
 
     private lateinit var viewModel: CommentsViewModel
-    private val commentsAdapter by lazy { CommentsAdapter() }
+    private val commentsAdapter by lazy { CommentsAdapter({clickedId -> this.handleCommentClicked(clickedId)}) }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,5 +40,11 @@ class CommentsActivity : AppCompatActivity() {
         viewModel.comments.observe(this, Observer {
             commentsAdapter.add(it ?: emptyList())
         })
+    }
+
+    private fun handleCommentClicked(clickedId: Int) {
+        val (clazz, intent) =  viewModel.onCommentClicked(clickedId)
+        intent.setClass(this, clazz)
+        startActivity(intent)
     }
 }

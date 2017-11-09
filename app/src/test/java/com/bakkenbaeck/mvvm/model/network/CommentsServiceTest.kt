@@ -1,5 +1,7 @@
 package com.bakkenbaeck.mvvm.model.network
 
+import com.bakkenbaeck.mvvm.di.Modules
+import com.bakkenbaeck.mvvm.di.TestModules
 import com.bakkenbaeck.mvvm.model.data.Comment
 import com.bakkenbaeck.testUtil.CommentsServiceGenerator
 import okhttp3.OkHttpClient
@@ -14,6 +16,7 @@ class CommentsServiceTest {
 
     @Before
     fun setup() {
+        Modules.init(TestModules())
         val mockNetworkSource = CommentsServiceGenerator()
         commentsService = mockNetworkSource.commentsService
         httpClient = mockNetworkSource.httpClient

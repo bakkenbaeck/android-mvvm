@@ -6,7 +6,6 @@ import android.util.Log
 import com.bakkenbaeck.mvvm.di.Modules
 import com.bakkenbaeck.mvvm.model.data.Comment
 import com.bakkenbaeck.mvvm.model.network.CommentsService
-import com.bakkenbaeck.mvvm.ui.comments.CommentsViewModel
 
 
 
@@ -33,7 +32,7 @@ class CommentsRepository (
                 .doOnSuccess(this::cacheComments)
                 .subscribe(
                         liveData::setValue,
-                        { Log.e(CommentsViewModel.TAG, "Error: $it") }
+                        { Log.e("CommentsViewModel", "Error: $it") }
                 )
 
         return liveData
@@ -43,5 +42,12 @@ class CommentsRepository (
 
     private fun cacheComments(comments: List<Comment>) {
         commentDao.save(comments)
+    }
+
+    fun getComment(commentId: Int): LiveData<Comment> {
+        val liveData = MutableLiveData<Comment>()
+        val comment = commentDao.getComment(commentId)
+        liveData.value = comment
+        return liveData
     }
 }

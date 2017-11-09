@@ -13,7 +13,6 @@ import org.mockito.Mockito
 
 
 class CommentsViewModelTest {
-    private lateinit var dependencies: TestModules
     private lateinit var viewModel: CommentsViewModel
     private lateinit var observer: Observer<List<Comment>>
 
@@ -22,8 +21,7 @@ class CommentsViewModelTest {
 
     @Before
     fun setup() {
-        dependencies = TestModules()
-        Modules.init(dependencies)
+        Modules.init(TestModules())
         viewModel = CommentsViewModel()
         observer = Mockito.mock(Observer::class.java) as Observer<List<Comment>>
     }
