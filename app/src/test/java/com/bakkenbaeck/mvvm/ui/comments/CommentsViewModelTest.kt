@@ -2,7 +2,6 @@ package com.bakkenbaeck.mvvm.ui.comments
 
 import android.arch.core.executor.testing.InstantTaskExecutorRule
 import android.arch.lifecycle.Observer
-import com.bakkenbaeck.mvvm.di.ModuleProvider
 import com.bakkenbaeck.mvvm.di.Modules
 import com.bakkenbaeck.mvvm.di.TestModules
 import com.bakkenbaeck.mvvm.model.data.Comment
@@ -13,8 +12,8 @@ import org.junit.Test
 import org.mockito.Mockito
 
 
-class CommentsViewHolderTest {
-    private lateinit var dependencies: ModuleProvider
+class CommentsViewModelTest {
+    private lateinit var dependencies: TestModules
     private lateinit var viewModel: CommentsViewModel
     private lateinit var observer: Observer<List<Comment>>
 

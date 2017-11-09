@@ -1,6 +1,6 @@
 package com.bakkenbaeck.mvvm.di
 
-import com.bakkenbaeck.mvvm.model.network.NetworkSource
+import com.bakkenbaeck.mvvm.model.repository.CommentsRepository
 
 object Modules {
     lateinit var provider: ModuleProvider
@@ -13,8 +13,8 @@ object Modules {
 private class ProductionDependencies: ModuleProvider {
     override fun baseUrl() = "https://jsonplaceholder.typicode.com/"
 
-    private val networkSource by lazy { NetworkSource() }
-    override fun networkSource() = networkSource
+    private val commentsRepo by lazy { CommentsRepository() }
+    override fun commentsRepo() = commentsRepo
 
     private val schedulerProvider by lazy { AppSchedulerProvider() }
     override fun scheduler() = schedulerProvider
@@ -22,6 +22,6 @@ private class ProductionDependencies: ModuleProvider {
 
 interface ModuleProvider {
     fun baseUrl(): String
-    fun networkSource(): NetworkSource
+    fun commentsRepo(): CommentsRepository
     fun scheduler(): SchedulerProvider
 }

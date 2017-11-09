@@ -1,27 +1,27 @@
 package com.bakkenbaeck.mvvm.model.network
 
 import com.bakkenbaeck.mvvm.model.data.Comment
-import com.bakkenbaeck.testUtil.NetworkSourceGenerator
+import com.bakkenbaeck.testUtil.CommentsServiceGenerator
 import okhttp3.OkHttpClient
 import org.junit.Assert.assertNotNull
 import org.junit.Before
 import org.junit.Test
 
 
-class NetworkSourceTest {
-    private lateinit var networkSource : NetworkSource
+class CommentsServiceTest {
+    private lateinit var commentsService: CommentsService
     private lateinit var httpClient: OkHttpClient
 
     @Before
     fun setup() {
-        val mockNetworkSource = NetworkSourceGenerator()
-        networkSource = mockNetworkSource.networkSource
+        val mockNetworkSource = CommentsServiceGenerator()
+        commentsService = mockNetworkSource.commentsService
         httpClient = mockNetworkSource.httpClient
     }
 
     @Test
     fun getCommentsReturnsNonNullResponse() {
-        val response: List<Comment> = networkSource.getComments().blockingGet()
+        val response: List<Comment> = commentsService.getComments().blockingGet()
         assertNotNull(response)
     }
 }
