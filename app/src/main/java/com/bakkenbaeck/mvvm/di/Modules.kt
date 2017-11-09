@@ -11,6 +11,8 @@ object Modules {
 }
 
 private class ProductionDependencies: ModuleProvider {
+    override fun baseUrl() = "https://jsonplaceholder.typicode.com/"
+
     private val networkSource by lazy { NetworkSource() }
     override fun networkSource() = networkSource
 
@@ -19,6 +21,7 @@ private class ProductionDependencies: ModuleProvider {
 }
 
 interface ModuleProvider {
+    fun baseUrl(): String
     fun networkSource(): NetworkSource
     fun scheduler(): SchedulerProvider
 }

@@ -2,6 +2,7 @@ package com.bakkenbaeck.mvvm.model.network
 
 import android.content.Context
 import com.bakkenbaeck.mvvm.R
+import com.bakkenbaeck.mvvm.di.Modules
 import com.bakkenbaeck.mvvm.ui.App
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -10,7 +11,6 @@ import retrofit2.converter.moshi.MoshiConverterFactory
 
 
 class NetworkSource(
-        private val context: Context = App.context(),
         private val httpClient: OkHttpClient = OkHttpClient()
 ) {
 
@@ -18,7 +18,7 @@ class NetworkSource(
 
     private fun initNetworkInterface(): NetworkInterface {
         val retrofit = Retrofit.Builder()
-                .baseUrl(context.getString(R.string.baseUrl))
+                .baseUrl(Modules.provider.baseUrl())
                 .addConverterFactory(MoshiConverterFactory.create())
                 .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
                 .client(httpClient)
