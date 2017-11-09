@@ -2,12 +2,10 @@ package com.bakkenbaeck.mvvm.ui.comments
 
 import android.arch.lifecycle.Observer
 import android.arch.lifecycle.ViewModelProviders
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.support.v7.widget.LinearLayoutManager
 import com.bakkenbaeck.mvvm.R
-import com.bakkenbaeck.mvvm.ui.details.DetailsActivity
 import kotlinx.android.synthetic.main.activity_comments.*
 
 class CommentsActivity : AppCompatActivity() {
@@ -45,8 +43,8 @@ class CommentsActivity : AppCompatActivity() {
     }
 
     private fun handleCommentClicked(clickedId: Int) {
-        val intent = Intent(this, DetailsActivity::class.java)
-                .putExtra(DetailsActivity.EXTRA_COMMENT_ID, clickedId)
+        val (clazz, intent) =  viewModel.onCommentClicked(clickedId)
+        intent.setClass(this, clazz)
         startActivity(intent)
     }
 }
