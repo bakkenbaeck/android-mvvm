@@ -15,18 +15,33 @@ class CommentsRepository (
         private val webService: CommentsService = CommentsService()
 ) {
     private val scheduler by lazy { Modules.provider.scheduler() }
+    private val commentDao by lazy { Modules.provider.database().commentDao() }
 
     fun getComments(): LiveData<List<Comment>> {
         val liveData = MutableLiveData<List<Comment>>()
+
+        val cachedResults = getCachedResults()
+        if (cachedResults.isNotEmpty()) {
+            liveData.value = cachedResults
+            return liveData
+        }
+
         webService
                 .getComments()
                 .subscribeOn(scheduler.io())
                 .observeOn(scheduler.ui())
+                .doOnSuccess(this::cacheComments)
                 .subscribe(
                         liveData::setValue,
                         { Log.e(CommentsViewModel.TAG, "Error: $it") }
                 )
 
         return liveData
+    }
+
+    private fun getCachedResults() = commentDao.getAllComments()
+
+    private fun cacheComments(comments: List<Comment>) {
+        commentDao.save(comments)
     }
 }
